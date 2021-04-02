@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { RecipeService } from 'src/shared/Recipe.service';
 import { MaterialModule } from './material/material.module';
 
 @NgModule({
@@ -14,7 +15,9 @@ import { MaterialModule } from './material/material.module';
     AppRoutingModule
     MaterialModule
   ],
-  providers: [],
+  providers: [
+    RecipeService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
