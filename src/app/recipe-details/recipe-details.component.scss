@@ -1,0 +1,35 @@
+#other-details-container {
+    width: 50%;
+    .header {
+        ::ng-deep figure {
+            justify-content: unset;
+        }
+    }
+}
+.container {
+    margin: 20px 0;
+}
+
+.ingredients-row {
+    position: relative;
+}
+
+.ingredients-row:not(.expanded) {
+    cursor: pointer;
+}
+
+.ingredients-row:not(.expanded):hover {
+    background: #f5f5f5;
+}
+
+.ingredients-row.expanded {
+    border-bottom-color: transparent;
+}
+
+.d-table-cell {
+    display: table-cell;
+}
+
+.d-table-column {
+    display: table-column;
+}

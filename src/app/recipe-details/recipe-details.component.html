@@ -1,0 +1,84 @@
+<mat-card>
+    <mat-card-title>
+        {{recipe.title}}
+    </mat-card-title>
+    <mat-card-subtitle>
+        {{recipe.description}}
+
+        <mat-grid-list cols="2" rowHeight="5rem" id="other-details-container" class="container">
+            <mat-grid-tile class="header">
+                <h3>Preparation Time</h3>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <p>{{recipe.cookTime}}</p>
+            </mat-grid-tile>
+            <mat-grid-tile class="header">
+                <h3>Cooking Time</h3>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <p>{{recipe.prepTime}}</p>
+            </mat-grid-tile>
+            <mat-grid-tile class="header">
+                <h3>Servings</h3>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <p>{{recipe.servings}}</p>
+            </mat-grid-tile>
+        </mat-grid-list>
+
+    </mat-card-subtitle>
+    <mat-card-content>
+        <div id="ingredients-container" class="container">
+            <h3 class="mat-h3">
+                Ingredients
+            </h3>
+            <table mat-table [dataSource]="recipe.ingredients" class="mat-elevation-z8">
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Name </th>
+                    <td mat-cell *matCellDef="let ingredient"> {{ingredient.name}} </td>
+                </ng-container>
+                <ng-container matColumnDef="amount">
+                    <th mat-header-cell *matHeaderCellDef> Amount </th>
+                    <td mat-cell *matCellDef="let ingredient"> {{ingredient.amount}} </td>
+                </ng-container>
+                <ng-container matColumnDef="measurement">
+                    <th mat-header-cell *matHeaderCellDef> Measurement </th>
+                    <td mat-cell *matCellDef="let ingredient"> {{ingredient.measurement}} </td>
+                </ng-container>
+                <ng-container matColumnDef="specialDetail">
+                    <td mat-cell *matCellDef="let ingredient">
+                        <ng-container *ngIf="!!ingredient.special">
+                            <h5>{{ingredient.special.title}}</h5>
+                            {{ingredient.special.text}}
+                        </ng-container>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="ingredientsColumn"></tr>
+                <tr mat-row class="ingredients-row" *matRowDef="let row; columns: ingredientsColumn;"
+                    [class.expanded]="expandedIngredient == row" (click)="expandedIngredient = row"></tr>
+                <tr mat-row *matRowDef="let row; columns: ['specialDetail']; when: isSpecialDetailRow"
+                    [ngClass]="[isActiveSpecialRow(row) ? 'd-table-cell' : 'd-table-column']" style="overflow: hidden">
+                </tr>
+            </table>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div id="directions-container" class="container">
+            <h3 class="mat-h3">
+                Directions
+            </h3>
+            <mat-list>
+                <mat-list-item *ngFor="let direction of recipe.directions">
+                    {{direction.instructions}}
+                    <span *ngIf="direction.optional">(Optional)</span>
+                </mat-list-item>
+            </mat-list>
+        </div>
+
+        <mat-divider></mat-divider>
+
+
+
+    </mat-card-content>
+</mat-card>
